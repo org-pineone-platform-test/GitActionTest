@@ -25,6 +25,10 @@ jobs:
       uses: azure/setup-kubectl@v3
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
+    - uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
     - name: Deploy to Kubernetes
       run: |
         kubectl get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
