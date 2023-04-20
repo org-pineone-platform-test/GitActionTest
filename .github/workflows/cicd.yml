@@ -35,7 +35,7 @@ jobs:
          action: deploy
          namespace: 'pineone'
          manifests: |
-          k8s/deployment.yaml
+          /k8s/deployment.yaml
          images: 'dev.pineone.com:20444/action_test/testccc:latest'
          imagepullsecrets: |
           harbor
