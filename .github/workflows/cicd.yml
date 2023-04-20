@@ -21,6 +21,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Read file
+      id: package
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ./deployment.yaml
+        
     - name: Setup Kubernetes CLI
       uses: azure/setup-kubectl@v3
       with:
@@ -30,12 +36,6 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
-        
-    - name: Read file
-      id: package
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: k8s/deployment.yaml
         
     - name: Deploy to Kubernetes
       run: |
