@@ -36,7 +36,7 @@ jobs:
       run: |
         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
         pwd
-        ls ./.github/workflows/
         echo ${{ github.workspace }}
+        ls ${{ github.workspace }}
         find . 
         echo '${{ steps.package.outputs.content }}' | kubectl --insecure-skip-tls-verify=true apply -f - -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
