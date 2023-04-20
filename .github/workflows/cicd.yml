@@ -32,9 +32,12 @@ jobs:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
         
+    - uses: actions/checkout@v1
+        
     - name: Deploy to Kubernetes
       run: |
         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
+
         pwd
         echo ${{ github.workspace }}
         ls ${{ github.workspace }}
