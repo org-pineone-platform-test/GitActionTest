@@ -29,18 +29,8 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
-    ## k8s image deploy
-    - uses: Azure/k8s-deploy@v4
-      with:
-         action: deploy
-         namespace: 'pineone'
-         manifests: |
-          /k8s/deployment.yaml
-         images: 'dev.pineone.com:20444/action_test/testccc:latest'
-         imagepullsecrets: |
-          harbor
-#     - name: Deploy to Kubernetes
-#       run: |
-#         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
-#         kubectl --insecure-skip-tls-verify=true apply -f testccc -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
+        kubectl --insecure-skip-tls-verify=true apply -f ${{ secrets.K8S_DEPLOY }} -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
 
