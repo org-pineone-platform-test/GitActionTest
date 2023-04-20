@@ -32,5 +32,6 @@ jobs:
     - name: Deploy to Kubernetes
       run: |
         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }} 
+        pwd
         kubectl --insecure-skip-tls-verify=true apply -f /home/pineone/testDeployment/deployment.yaml -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
 
