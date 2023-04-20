@@ -31,8 +31,6 @@ jobs:
         kubeconfig: ${{ secrets.KUBECONFIG }}
     - name: Deploy to Kubernetes
       run: |
-        ls -la
         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
-        ls -la
-        kubectl --insecure-skip-tls-verify=true apply -f ./k8s/deployment.yaml -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
+        kubectl --insecure-skip-tls-verify=true apply -f testccc -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
 
