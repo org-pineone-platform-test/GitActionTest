@@ -25,11 +25,19 @@ jobs:
       uses: azure/setup-kubectl@v3
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
+        
     - uses: azure/k8s-set-context@v3
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
+        
+    - name: Read package.json
+      id: package
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: k8s/deployment.yaml
+        
     - name: Deploy to Kubernetes
       run: |
         kubectl --insecure-skip-tls-verify=true get pods -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
-        echo '${{ secrets.K8S_DEPLOY }}' | kubectl --insecure-skip-tls-verify=true apply -f - -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
+        echo '${{ steps.package.outputs.content }}' | kubectl --insecure-skip-tls-verify=true apply -f - -n pineone --token ${{ secrets.K8S_USER_TOKEN }}
