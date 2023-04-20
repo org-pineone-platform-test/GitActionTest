@@ -21,12 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Read file
-      id: package
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: ./deployment.yaml
-        
+       
     - name: Setup Kubernetes CLI
       uses: azure/setup-kubectl@v3
       with:
