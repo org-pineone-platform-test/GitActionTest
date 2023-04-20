@@ -31,7 +31,7 @@ jobs:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
         
-    - name: Read package.json
+    - name: Read file
       id: package
       uses: juliangruber/read-file-action@v1
       with:
